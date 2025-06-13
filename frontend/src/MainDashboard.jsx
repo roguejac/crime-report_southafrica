@@ -14,7 +14,7 @@ const MainDashboard = () => {
 
   const fetchData = async (area) => {
     try {
-      const res = await axios.get(`http://localhost:8000/dashboard`, {
+      const res = await axios.get(`http://localhost:8000`, {
         params: { area: area === "South Africa" ? "" : area }
       });
       setData(res.data);
@@ -24,7 +24,7 @@ const MainDashboard = () => {
   };
 
 useEffect(() => {
-  axios.get(`${BASE_URL}/dashboard`)
+  axios.get(`${BASE_URL}/`)
     .then((res) => {
       console.log(res.data);
     })
