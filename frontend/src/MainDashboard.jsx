@@ -11,6 +11,7 @@ const MainDashboard = () => {
   const [area, setArea] = useState("South Africa");
   const [areas, setAreas] = useState(["South Africa", "Soweto", "Cape Town", "Durban", "Midrand", "Pretoria"]);
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async (area) => {
     try {
@@ -23,19 +24,32 @@ const MainDashboard = () => {
     }
   };
 
-useEffect(() => {
-  axios.get(`${BASE_URL}/`)
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.error("Error fetching dashboard data:", err);
-    });
-}, []);
+  useEffect(() => {
+    console.log("Fetching dashboard data...");
+    axios.get(`${BASE_URL}`)
+      .then(res => {
+        console.log("Dashboard data fetched:", res.data);
+        setData(res.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching dashboard data:", err);
+        setLoading(false);
+      });
+  }, []);
 
   const resetDashboard = () => setArea("South Africa");
 
-  if (!data) return <p>Loading dashboard...</p>;
+  if (loading) {
+    return <div>Loading dashboard...</div>;
+  }
+  return (
+    <div>
+      <h1>Main Dashboard</h1>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
+}
 
   const {
     total_crimes,
