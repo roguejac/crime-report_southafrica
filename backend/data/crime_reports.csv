@@ -1,0 +1,80 @@
+report_id,area,type,timestamp
+report_1,Pretoria,Assault,2025-06-05T09:25:03.583072
+report_2,Midrand,Theft,2025-06-03T09:25:03.583095
+report_3,Soweto,Burglary,2025-06-11T09:25:03.583102
+report_4,Soweto,Assault,2025-06-12T09:25:03.583109
+report_5,Pretoria,Vandalism,2025-05-28T09:25:03.583115
+report_6,Midrand,Vandalism,2025-06-05T09:25:03.583121
+report_7,Pretoria,Burglary,2025-06-12T09:25:03.583136
+report_8,Midrand,Burglary,2025-06-04T09:25:03.583144
+report_9,Soweto,Robbery,2025-06-03T09:25:03.583158
+report_10,Durban,Vandalism,2025-06-04T09:25:03.583169
+report_11,Durban,Burglary,2025-06-01T09:25:03.583178
+report_12,Cape Town,Vandalism,2025-06-02T09:25:03.583185
+report_13,Pretoria,Vandalism,2025-05-25T09:25:03.583191
+report_14,Midrand,Assault,2025-05-25T09:25:03.583203
+report_15,Soweto,Burglary,2025-06-03T09:25:03.583213
+report_16,Durban,Burglary,2025-05-25T09:25:03.583225
+report_17,Soweto,Assault,2025-05-24T09:25:03.583234
+report_18,Durban,Burglary,2025-05-31T09:25:03.583244
+report_19,Pretoria,Robbery,2025-06-07T09:25:03.583266
+report_20,Midrand,Robbery,2025-05-28T09:25:03.583272
+report_21,Midrand,Burglary,2025-05-26T09:25:03.583278
+report_22,Midrand,Assault,2025-06-03T09:25:03.583284
+report_23,Pretoria,Burglary,2025-06-05T09:25:03.583289
+report_24,Cape Town,Theft,2025-06-13T09:25:03.583295
+report_25,Soweto,Theft,2025-06-04T09:25:03.583301
+report_26,Pretoria,Burglary,2025-06-13T09:25:03.583307
+report_27,Soweto,Burglary,2025-06-03T09:25:03.583312
+report_28,Midrand,Theft,2025-06-08T09:25:03.583318
+report_29,Cape Town,Theft,2025-05-27T09:25:03.583323
+report_30,Cape Town,Robbery,2025-05-28T09:25:03.583328
+report_31,Cape Town,Vandalism,2025-05-25T09:25:03.583336
+report_32,Soweto,Robbery,2025-06-03T09:25:03.583346
+report_33,Soweto,Assault,2025-06-06T09:25:03.583356
+report_34,Soweto,Robbery,2025-05-24T09:25:03.583366
+report_35,Cape Town,Burglary,2025-06-03T09:25:03.583373
+report_36,Durban,Burglary,2025-06-13T09:25:03.583383
+report_37,Cape Town,Assault,2025-06-10T09:25:03.583392
+report_38,Midrand,Vandalism,2025-06-03T09:25:03.583401
+report_39,Midrand,Theft,2025-06-13T09:25:03.583421
+report_40,Midrand,Assault,2025-06-04T09:25:03.583431
+report_41,Cape Town,Theft,2025-06-13T09:25:03.583440
+report_42,Cape Town,Robbery,2025-05-27T09:25:03.583449
+report_43,Cape Town,Burglary,2025-06-06T09:25:03.583457
+report_44,Cape Town,Vandalism,2025-06-02T09:25:03.583466
+report_45,Cape Town,Assault,2025-06-13T09:25:03.583475
+report_46,Durban,Assault,2025-06-09T09:25:03.583483
+report_47,Pretoria,Burglary,2025-05-27T09:25:03.583493
+report_48,Durban,Burglary,2025-05-26T09:25:03.583502
+report_49,Durban,Assault,2025-05-30T09:25:03.583512
+report_50,Cape Town,Vandalism,2025-06-11T09:25:03.583521
+report_51,Durban,Burglary,2025-05-24T09:25:03.583538
+report_52,Cape Town,Theft,2025-06-05T09:25:03.583549
+report_53,Soweto,Vandalism,2025-05-27T09:25:03.583559
+report_54,Midrand,Vandalism,2025-06-10T09:25:03.583569
+report_55,Cape Town,Assault,2025-05-27T09:25:03.583578
+report_56,Durban,Theft,2025-06-13T09:25:03.583583
+report_57,Midrand,Robbery,2025-06-10T09:25:03.583592
+report_58,Durban,Robbery,2025-06-08T09:25:03.583602
+report_59,Durban,Vandalism,2025-06-05T09:25:03.583613
+report_60,Pretoria,Assault,2025-05-28T09:25:03.583622
+report_61,Cape Town,Vandalism,2025-06-10T09:25:03.583632
+report_62,Midrand,Robbery,2025-05-28T09:25:03.583643
+report_63,Midrand,Burglary,2025-06-02T09:25:03.583649
+report_64,Cape Town,Robbery,2025-06-02T09:25:03.583655
+report_65,Pretoria,Vandalism,2025-05-29T09:25:03.583661
+report_66,Durban,Vandalism,2025-05-25T09:25:03.583667
+report_67,Pretoria,Robbery,2025-05-29T09:25:03.583674
+report_68,Pretoria,Vandalism,2025-06-02T09:25:03.583683
+report_69,Cape Town,Vandalism,2025-05-30T09:25:03.583693
+report_70,Midrand,Theft,2025-06-11T09:25:03.583710
+report_71,Midrand,Robbery,2025-05-31T09:25:03.583715
+report_72,Durban,Theft,2025-06-06T09:25:03.583721
+report_73,Soweto,Burglary,2025-06-03T09:25:03.583726
+report_74,Midrand,Vandalism,2025-05-24T09:25:03.583732
+report_75,Durban,Theft,2025-05-30T09:25:03.583738
+report_76,Midrand,Robbery,2025-05-29T09:25:03.583744
+report_77,Soweto,Assault,2025-06-12T09:25:03.583749
+report_78,Soweto,Theft,2025-05-28T09:25:03.583755
+report_79,Midrand,Robbery,2025-06-09T09:25:03.583760
