@@ -47,7 +47,26 @@ class CrimeReport(BaseModel):
 @app.get("/")
 def root():
     return {"message": "Crime Dashboard Backend is Running ✅"}
+@app.get("/dashboard")
+def get_dashboard():
+    print("🚀 /dashboard route was hit")
 
+    # Example structure (mock data)
+    return {
+        "summary": {
+            "total_reports": 1200,
+            "most_common_crime": "Theft",
+            "least_common_crime": "Kidnapping"
+        },
+        "top_areas": [
+            {"area": "Johannesburg", "crime_count": 340},
+            {"area": "Cape Town", "crime_count": 270}
+        ],
+        "time_series": [
+            {"month": "2024-01", "reports": 123},
+            {"month": "2024-02", "reports": 156},
+        ]
+    }
 @app.get("/api/crime-data")
 def get_crime_data():
     df = pd.read_csv(DATA_PATH)
