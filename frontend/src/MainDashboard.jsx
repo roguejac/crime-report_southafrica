@@ -4,7 +4,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell
 } from "recharts";
-
+import BASE_URL from './apiConfig';
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const MainDashboard = () => {
@@ -23,9 +23,18 @@ const MainDashboard = () => {
     }
   };
 
-  useEffect(() => {
-    fetchData(area);
-  }, [area]);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/dashboard`);
+      setDashboardData(response.data);
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+    }
+  };
+
+  fetchData();
+}, []);
 
   const resetDashboard = () => setArea("South Africa");
 
