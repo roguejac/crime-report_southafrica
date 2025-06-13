@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
+import BASE_URL from './apiConfig';
 import { API_BASE_URL } from "./config";
 import {
   LineChart,
@@ -13,12 +15,15 @@ import {
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
 
-  useEffect(() => {
-    fetch(`${API_BASE_URL}/admin-stats`)
-      .then((res) => res.json())
-      .then((data) => setStats(data))
-      .catch((err) => console.error("Error loading admin stats:", err));
-  }, []);
+useEffect(() => {
+  axios.get(`${BASE_URL}/dashboard`)
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.error("Error fetching dashboard data:", err);
+    });
+}, []);
 
   if (!stats) return <p>Loading admin dashboard...</p>;
 
