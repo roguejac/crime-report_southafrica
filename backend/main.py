@@ -1,3 +1,4 @@
+from fastapi.middleware.cors import CORSMiddleware
 from collections import Counter
 from fastapi import FastAPI
 from datetime import datetime
