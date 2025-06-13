@@ -14,7 +14,7 @@ function MainDashboard() {
     async function fetchDashboardData() {
       try {
         console.log('Fetching dashboard data...');
-        const response = await axios.get('https://crime-report-southafrica.onrender.com/dashboard'); // Replace with your actual backend URL
+        const response = await axios.get('https://crime-report-southafrica.onrender.com'); // Replace with your actual backend URL
         console.log('Dashboard data fetched:', response.data);
         setDashboardData(response.data);
       } catch (error) {
