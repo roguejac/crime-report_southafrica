@@ -16,7 +16,7 @@ const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
 
 useEffect(() => {
-  axios.get(`${BASE_URL}/dashboard`)
+  axios.get(`${BASE_URL}`)
     .then((res) => {
       console.log(res.data);
     })
