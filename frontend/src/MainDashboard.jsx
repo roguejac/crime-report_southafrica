@@ -24,16 +24,13 @@ const MainDashboard = () => {
   };
 
 useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}/dashboard`);
-      setDashboardData(response.data);
-    } catch (error) {
-      console.error('Error fetching dashboard data:', error);
-    }
-  };
-
-  fetchData();
+  axios.get(`${BASE_URL}/dashboard`)
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.error("Error fetching dashboard data:", err);
+    });
 }, []);
 
   const resetDashboard = () => setArea("South Africa");
