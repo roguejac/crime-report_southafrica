@@ -1,92 +1,94 @@
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from collections import Counter
-from fastapi import FastAPI
-from datetime import datetime
 from pydantic import BaseModel
-import csv
+from datetime import datetime
+import pandas as pd
 import os
+import uuid
+import json
 
 app = FastAPI()
 
+# Allow frontend to access backend (update in production)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Use specific frontend URL in production
+    allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
-db = {
-    "reports": [],
-    "users": 0
-}
+# Paths
+DATA_PATH = "data/crime_data.csv"
+LOG_PATH = "data/usage_log.csv"
 
+# Create folders/files if not exist
+os.makedirs("data", exist_ok=True)
+if not os.path.exists(DATA_PATH):
+    pd.DataFrame(columns=[
+        "timestamp", "area", "crime_type", "time_of_day", "day_of_week", "severity", "source", "lat", "lon"
+    ]).to_csv(DATA_PATH, index=False)
+
+if not os.path.exists(LOG_PATH):
+    pd.DataFrame(columns=["user_id", "action", "timestamp"]).to_csv(LOG_PATH, index=False)
+
+# ---------- DATA MODEL ---------- #
 class CrimeReport(BaseModel):
     area: str
-    time_of_day: str
-    day_type: str
-    description: str
+    crime_type: str
+    time_of_day: str  # morning, afternoon, night
+    day_of_week: str  # Monday, Tuesday, ...
+    severity: int
+    lat: float
+    lon: float
+    source: str = "user"
 
+# ---------- ROUTES ---------- #
 @app.get("/")
-def read_root():
-    return {"status": "Crime API running"}
+def root():
+    return {"message": "Crime Dashboard Backend is Running ✅"}
 
-@app.post("/report")
-def report_crime(data: CrimeReport):
-    db["reports"].append(data.dict())
-    return {"message": "Report received"}
+@app.get("/api/crime-data")
+def get_crime_data():
+    df = pd.read_csv(DATA_PATH)
+    return df.to_dict(orient="records")
 
-@app.get("/predict")
-def predict(area: str = "", time_of_day: str = ""):
-    # Dummy prediction
-    return {"prediction": "High Risk" if time_of_day == "night" else "Moderate Risk"}
-
-@app.get("/admin-stats")
-def get_admin_stats():
-    # Paths to the CSVs
-    user_log_path = "data/user_log.csv"
-    prediction_log_path = "data/predictions.csv"
-    crime_log_path = "data/crime_reports.csv"
-
-    # Counts
-    total_users = 0
-    predictions_made = 0
-    total_crime_reports = 0
-    prediction_trends = []
-
-    # Count users
-    if os.path.exists(user_log_path):
-        with open(user_log_path, newline='') as f:
-            total_users = sum(1 for row in csv.reader(f)) - 1  # Subtract header
-
-    # Count predictions and trends
-    date_counts = Counter()
-    if os.path.exists(prediction_log_path):
-        with open(prediction_log_path, newline='') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                predictions_made += 1
-                date_str = row.get("timestamp", "").split("T")[0]
-                if date_str:
-                    date_counts[date_str] += 1
-
-    prediction_trends = [{"date": d, "count": date_counts[d]} for d in sorted(date_counts)]
-
-    # Count reported crimes
-    if os.path.exists(crime_log_path):
-        with open(crime_log_path, newline='') as f:
-            total_crime_reports = sum(1 for row in csv.reader(f)) - 1  # Subtract header
-
-    return {
-        "total_users": total_users,
-        "predictions_made": predictions_made,
-        "total_crime_reports": total_crime_reports,
-        "prediction_trends": prediction_trends
+@app.post("/api/report-crime")
+def report_crime(report: CrimeReport, request: Request):
+    new_record = {
+        "timestamp": datetime.now().isoformat(),
+        "area": report.area,
+        "crime_type": report.crime_type,
+        "time_of_day": report.time_of_day,
+        "day_of_week": report.day_of_week,
+        "severity": report.severity,
+        "lat": report.lat,
+        "lon": report.lon,
+        "source": report.source
     }
+    df = pd.read_csv(DATA_PATH)
+    df = pd.concat([df, pd.DataFrame([new_record])], ignore_index=True)
+    df.to_csv(DATA_PATH, index=False)
 
+    # Log the action
+    user_id = request.headers.get("X-User-ID", str(uuid.uuid4()))
+    log_action(user_id, "report_crime")
+    
+    return {"status": "success", "record": new_record}
 
-@app.middleware("http")
-async def count_users(request: Request, call_next):
-    if request.url.path == "/":
-        db["users"] += 1
-    response = await call_next(request)
-    return response
+@app.post("/api/log-action")
+def log_user_action(request: Request):
+    user_id = request.headers.get("X-User-ID", str(uuid.uuid4()))
+    data = json.loads(request.body())
+    action = data.get("action", "unknown")
+    log_action(user_id, action)
+    return {"status": "logged"}
+
+def log_action(user_id: str, action: str):
+    log_df = pd.read_csv(LOG_PATH)
+    log_df = pd.concat([log_df, pd.DataFrame([{
+        "user_id": user_id,
+        "action": action,
+        "timestamp": datetime.now().isoformat()
+    }])])
+    log_df.to_csv(LOG_PATH, index=False)
