@@ -22,7 +22,7 @@ const MainDashboard = () => {
     } catch (err) {
       console.error("Failed to fetch dashboard data:", err);
     }
-  
+  };
 
   useEffect(() => {
     console.log("Fetching dashboard data...");
@@ -49,7 +49,7 @@ const MainDashboard = () => {
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
-}
+
 
   const {
     total_crimes,
